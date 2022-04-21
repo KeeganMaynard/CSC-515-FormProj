@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CSC 515 HW1</title>
+    <style type="text/css">
+        p {
+            text-align: center;
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 12px 20px;
+        }
+
+        select {
+            margin-bottom: 10px;
+        }
+
+        #fname {
+            width: 70%;
+        }
+
+        #lname {
+            width: 70%;
+        }
+
+        #mobile {
+            width: 70%;
+        }
+
+        #city {
+            width: 70%;
+        }
+
+        #state {
+            width: 70%;
+        }
+
+        #pword {
+            width: 70%;
+        }
+
+        #submit {
+            padding: 2px !important;
+        }
+
+        #gender {
+            border: none;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Registration Form</p>
+
+    <form action="/sub_page.php">
+        <label for="fname">First Name:</label>
+        <br>
+        <input type="text" id="fname" name="fname" placeholder="Enter your first name">
+        <br>
+        <label for="lname">Last Name:</label>
+        <br>
+        <input type="text" id="lname" name="lname" placeholder="Enter your last name">
+        <br>
+        <label for="mobile">Mobile:</label>
+        <br>
+        <input type="tel" id="mobile" name="mobile" maxlength="10">
+        <br>
+        <label for="gender">Gender:</label>
+        <br>
+        <fieldset id="gender" name="gender">
+            <input type="radio" id="male" name="gender">Male
+            <input type="radio" id="female" name="gender">Female
+        </fieldset>
+        <label for="city">City:</label>
+        <br>
+        <input type="text" id="city" name="city">
+        <br>
+        <label for="state">State:</label>
+        <br>
+        <input type="text" id="state" name="state">
+        <br>
+        <label for="qualif">Qualification:</label>
+        <br>
+        <select id="qualif" name="qualif">
+            <option value="select" disabled selected>Select Qualification:</option>
+            <option value="graduation">Graduation</option>
+            <option value="BTech">BTech</option>
+            <option value="MTech">MTech</option>
+            <option value="mca">MCA</option>
+            <option value="bca">BCA</option>
+        </select>
+        <br>
+        <label for="pword">Password:</label>
+        <br>
+        <input type="password" id="pword" name="pword">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
