@@ -4,7 +4,7 @@
 <head>
     <title>CSC 515 HW1</title>
     <style type="text/css">
-        p {
+        #Heading {
             text-align: center;
             color: red;
             font-size: 20px;
@@ -19,7 +19,7 @@
 
         input {
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             padding: 12px 20px;
         }
 
@@ -63,43 +63,49 @@
             border: none;
             margin-bottom: 0px;
         }
+
+        .div {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
 <body>
-    <p>Registration Form</p>
+    <p id="Heading">Registration Form</p>
 
-    <form action="/sub_page.php">
+    <!-- To open in xampp, type localhost/Form.html into browser -->
+    <form action="sub_page.php" method="post">
         <label for="fname">First Name:</label>
         <br>
         <input type="text" id="fname" name="fname" placeholder="Enter your first name">
-        <br>
+        <div id="resultFName"></div>
         <label for="lname">Last Name:</label>
         <br>
         <input type="text" id="lname" name="lname" placeholder="Enter your last name">
-        <br>
+        <div id="resultLName"></div>
         <label for="email">Email:</label>
         <br>
         <input type="text" id="email" name="email" placeholder="Enter your Email">
-        <br>
+        <div id="resultEmail"></div>
         <label for="mobile">Mobile:</label>
         <br>
-        <input type="tel" id="mobile" name="mobile" maxlength="10">
-        <br>
+        <input type="tel" id="mobile" name="mobile" minLength="9" maxlength="10">
+        <div id="resultMobile"></div>
         <label for="gender">Gender:</label>
         <br>
-        <fieldset id="gender" name="gender">
-            <input type="radio" id="male" name="gender">Male
-            <input type="radio" id="female" name="gender">Female
+        <fieldset id="gender">
+            <input type="radio" id="male" value="male" name="gender">Male
+            <input type="radio" id="female" value="female" name="gender">Female
         </fieldset>
+        <div id="resultGender"></div>
         <label for="city">City:</label>
         <br>
         <input type="text" id="city" name="city">
-        <br>
+        <div id="resultCity"></div>
         <label for="state">State:</label>
         <br>
         <input type="text" id="state" name="state">
-        <br>
+        <div id="resultState"></div>
         <label for="qualif">Qualification:</label>
         <br>
         <select id="qualif" name="qualif">
@@ -110,13 +116,57 @@
             <option value="mca">MCA</option>
             <option value="bca">BCA</option>
         </select>
-        <br>
+        <div id="resultQual"></div>
         <label for="pword">Password:</label>
         <br>
         <input type="password" id="pword" name="pword">
-        <br>
-        <input type="submit" value="Submit">
+        <div id="resultPass"></div>
+        <input type="submit" value="Submit" onclick="return Validate();">
     </form>
+    <script type="text/javascript">
+
+        function Validate() {
+            if (document.getElementById('fname').value == "") {
+                document.getElementById('resultFName').innerHTML += "<p style='color:red'>Invalid name, try again.</p>";
+                return false;
+            }
+            else if (document.getElementById('lname').value == "") {
+                document.getElementById('resultLName').innerHTML += "<p style='color:red'>Invalid name, try again.</p>";
+                return false;
+            }
+            else if (document.getElementById('email').value == "") {
+                document.getElementById('resultEmail').innerHTML += "<p style='color:red'>Invalid email, try again.</p>";
+                return false;
+            }
+            else if (document.getElementById('mobile').value == "") {
+                document.getElementById('resultMobile').innerHTML += "<p style='color:red'>Invalid mobile, try again.</p>";
+                return false;
+            }
+            else if (document.getElementById('gender').value == "") {
+                document.getElementById('resultGender').innerHTML += "<p style='color:red'>Select a gender.</p>";
+                return false;
+            }
+            else if (document.getElementById('city').value == "") {
+                document.getElementById('resultCity').innerHTML += "<p style='color:red'>Invalid city, try again.</p>";
+                return false;
+            }
+            else if (document.getElementById('state').value == "") {
+                document.getElementById('resultState').innerHTML += "<p style='color:red'>Invalid state, try again.</p>";
+                return false;
+            }
+            else if (document.getElementById('qualif').value == "") {
+                document.getElementById('resultQual').innerHTML += "<p style='color:red'>Select a qualification.</p>";
+                return false;
+            }
+            else if (document.getElementById('pword').value == "") {
+                document.getElementById('resultPass').innerHTML += "<p style='color:red'>Invalid password, try again.</p>";
+                return false;
+            }
+            else {
+
+            }
+        }
+    </script>
 </body>
 
 </html>
