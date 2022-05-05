@@ -4,7 +4,6 @@ $errors = [];
 $data = [];
 
 $fname = $_POST["name"];
-echo $fname;
 $lname = $_POST["last"];
 $email = $_POST["email"];
 $mobile = $_POST["number"];
