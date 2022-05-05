@@ -1,23 +1,26 @@
 <?php
     require_once "db.php";
 
-$fname = mysqli_real_escape_string($conn,$_POST["firstname"]);
-$lname = mysqli_real_escape_string($conn,$_POST["lastname"]);
+$fname = mysqli_real_escape_string($conn,$_POST["name"]);
+$lname = mysqli_real_escape_string($conn,$_POST["last"]);
 $email = mysqli_real_escape_string($conn,$_POST["email"]);
-$mobile = mysqli_real_escape_string($conn,$_POST["mobile"]);
+$mobile = mysqli_real_escape_string($conn,$_POST["number"]);
 $gender = mysqli_real_escape_string($conn,$_POST["gender"]);
 $city = mysqli_real_escape_string($conn,$_POST["city"]);
 $state = mysqli_real_escape_string($conn,$_POST["state"]);
-$qualif = mysqli_real_escape_string($conn,$_POST["qualification"]);
-$pass = mysqli_real_escape_string($conn,$_POST["password"]);
+$qualification = mysqli_real_escape_string($conn,$_POST["qualif"]);
+$password = mysqli_real_escape_string($conn,$_POST["pword"]);
 
-if (mysqli_query($conn,"INSERT INTO csc515-project (firstname, lastname, email, mobile, gender,
- city, state, qualification, password)
-VALUES ('" . $fname . "', '" . $lname. "', '" . $email . "', '" . $mobile . "', '"  . $gender . "', '" . $city . "', '" . $state . "', '" . $qualif . "', '" . $pass . "')")){
+$sql = "INSERT INTO csc515_project (firstname, lastname, email, mobile, gender, city, state, qualification, password)
+VALUES ('$fname','$lname','$email',$mobile,'$gender','$city','$state','$qualification','$password');";
+   
+if (mysqli_query($conn, $sql)){
     echo '1';
-} else {
-    echo "Error: " . $sql . "" . mysqli_error($conn);
+}
+else {
+    echo '"Error: " . $sql . "" . mysqli_error($conn)';
 }
 
 mysqli_close($conn);
+//'" . $fname . "', '" . $lname. "', '" . $email . "', '" . $mobile . "', '"  . $gender . "', '" . $city . "', '" . $state . "', '" . $qualif . "', '" . $pass . "')")
 ?>

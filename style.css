@@ -1,0 +1,63 @@
+#Heading {
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+input {
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 12px 20px;
+}
+
+select {
+    margin-bottom: 10px;
+}
+
+#fname {
+    width: 70%;
+}
+
+#lname {
+    width: 70%;
+}
+
+#email {
+    width: 70%;
+}
+
+#mobile {
+    width: 70%;
+}
+
+#city {
+    width: 70%;
+}
+
+#state {
+    width: 70%;
+}
+
+#pword {
+    width: 70%;
+}
+
+#submit {
+    padding: 2px !important;
+}
+
+#gender {
+    border: none;
+    margin-bottom: 0px;
+}
+
+.div {
+    margin-bottom: 5px;
+}
