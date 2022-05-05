@@ -182,18 +182,21 @@
                     return false;
                 }
                 else {
-                    //Hardcoded values for testing - replace with input values
+                    //Grab values of radio button and selected option
+                    var selGen = $("input[name='gender']:checked").val();
+                    var selQual = $("#qualif").find(":selected").val();
+
                     $.post("sub_page.php",
                         {
-                            name: "Keegan",
-                            last: "Maynard",
-                            email: "Keegan.m13@yahoo.com",
-                            number: "5734897513",
-                            gender: "Male",
-                            city: "Ashland",
-                            state: "MO",
-                            qualif: "Graduation",
-                            passW: "TestPass"
+                            name: first,
+                            last: last,
+                            email: mail,
+                            number: number,
+                            gender: selGen,
+                            city: location,
+                            state: state,
+                            qualif: selQual,
+                            passW: pass
                         },
                         function (status) {
                             alert("Status: " + status);
