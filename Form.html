@@ -121,49 +121,137 @@
         <br>
         <input type="password" id="pword" name="pword">
         <div id="resultPass"></div>
-        <input type="submit" value="Submit" onclick="return Validate();">
+        <input type="submit" value="Submit" onclick=" return Validate();">
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript">
+        //add $(document).ready(function(){} to this code
 
         function Validate() {
-            if (document.getElementById('fname').value == "") {
-                document.getElementById('resultFName').innerHTML += "<p style='color:red'>Invalid name, try again.</p>";
-                return false;
-            }
-            else if (document.getElementById('lname').value == "") {
-                document.getElementById('resultLName').innerHTML += "<p style='color:red'>Invalid name, try again.</p>";
-                return false;
-            }
-            else if (document.getElementById('email').value == "") {
-                document.getElementById('resultEmail').innerHTML += "<p style='color:red'>Invalid email, try again.</p>";
-                return false;
-            }
-            else if (document.getElementById('mobile').value == "") {
-                document.getElementById('resultMobile').innerHTML += "<p style='color:red'>Invalid mobile, try again.</p>";
-                return false;
-            }
-            else if (document.getElementById('gender').value == "") {
-                document.getElementById('resultGender').innerHTML += "<p style='color:red'>Select a gender.</p>";
-                return false;
-            }
-            else if (document.getElementById('city').value == "") {
-                document.getElementById('resultCity').innerHTML += "<p style='color:red'>Invalid city, try again.</p>";
-                return false;
-            }
-            else if (document.getElementById('state').value == "") {
-                document.getElementById('resultState').innerHTML += "<p style='color:red'>Invalid state, try again.</p>";
-                return false;
-            }
-            else if (document.getElementById('qualif').value == "") {
-                document.getElementById('resultQual').innerHTML += "<p style='color:red'>Select a qualification.</p>";
-                return false;
-            }
-            else if (document.getElementById('pword').value == "") {
-                document.getElementById('resultPass').innerHTML += "<p style='color:red'>Invalid password, try again.</p>";
-                return false;
+            //variable declarations
+            var first = document.getElementById('fname').value;
+            var last = document.getElementById('lname').value;
+            var mail = document.getElementById('email').value;
+            var number = document.getElementById('mobile').value;
+            var location = document.getElementById('city').value;
+            var state = document.getElementById('state').value;
+            var pass = document.getElementById('pword').value;
+            var errorCount = 0;
+
+            //validation
+            if (!/^[a-zA-Z'\s]{1,30}$/.test(first)) {
+                document.getElementById('resultFName').innerText = "";
+                document.getElementById('resultFName').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
             }
             else {
+                document.getElementById('resultFName').innerText = "";
+                errorCount--;
+                document.getElementById('resultFName').innerHTML += "<p style='color:green'>Correct</p>";
+            }
 
+            if (!/^[a-zA-Z'\s]{1,30}$/.test(last)) {
+                document.getElementById('resultLName').innerText = "";
+                document.getElementById('resultLName').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultLName').innerText = "";
+                errorCount--;
+                document.getElementById('resultLName').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            //need to limit to two domains
+            if (!/^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$/.test(mail)) {
+                document.getElementById('resultEmail').innerText = "";
+                document.getElementById('resultEmail').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultEmail').innerText = "";
+                errorCount--;
+                document.getElementById('resultEmail').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            //Utilized to prevent letters from being inserted into mobile
+            if (!/^(?=.*\d)/.test(number)) {
+                document.getElementById('resultMobile').innerText = "";
+                document.getElementById('resultMobile').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultMobile').innerText = "";
+                errorCount--;
+                document.getElementById('resultMobile').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            if (!document.getElementById('male').checked) {
+                if (!document.getElementById('female').checked) {
+                    document.getElementById('resultGender').innerText = "";
+                    document.getElementById('resultGender').innerHTML += "<p style='color:red'>Error</p>";
+                    errorCount++;
+                }
+            }
+            else {
+                document.getElementById('resultGender').innerText = "";
+                errorCount--;
+                document.getElementById('resultGender').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            if (document.getElementById('female').checked) {
+                document.getElementById('resultGender').innerText = "";
+                errorCount--;
+                document.getElementById('resultGender').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            //Preventing numbers from being input
+            if (!/^[a-zA-Z]/.test(location)) {
+                document.getElementById('resultCity').innerText = "";
+                document.getElementById('resultCity').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultCity').innerText = "";
+                errorCount--;
+                document.getElementById('resultCity').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            //Preventing numbers from being input
+            if (!/^[a-zA-Z]/.test(state)) {
+                document.getElementById('resultState').innerText = "";
+                document.getElementById('resultState').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultState').innerText = "";
+                errorCount--;
+                document.getElementById('resultState').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            if (document.getElementById('qualif').selectedIndex == 0) {
+                document.getElementById('resultQual').innerText = "";
+                document.getElementById('resultQual').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultQual').innerText = "";
+                errorCount--;
+                document.getElementById('resultQual').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){3,10}/.test(pass)) {
+                document.getElementById('resultPass').innerText = "";
+                document.getElementById('resultPass').innerHTML += "<p style='color:red'>Error</p>";
+                errorCount++;
+            }
+            else {
+                document.getElementById('resultPass').innerText = "";
+                errorCount--;
+                document.getElementById('resultPass').innerHTML += "<p style='color:green'>Correct</p>";
+            }
+
+            if (errorCount != 0) {
+                return false;
             }
         }
     </script>
