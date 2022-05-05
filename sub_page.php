@@ -1,17 +1,20 @@
-<html>
-<body>
 
 <?php
-$fname = $_POST["fname"];
-$lname = $_POST["lname"];
+$errors = [];
+$data = [];
+
+$fname = $_POST["name"];
+echo $fname;
+$lname = $_POST["last"];
 $email = $_POST["email"];
-$mobile = $_POST["mobile"];
+$mobile = $_POST["number"];
 $gender = $_POST["gender"];
 $city = $_POST["city"];
 $state = $_POST["state"];
 $qualif = $_POST["qualif"];
-$pass = $_POST["pword"];
-?>
+$pass = $_POST["passW"];
 
-</body>
-</html>
+$data['message'] = 'In the PHP';
+
+echo json_encode($data);
+?>

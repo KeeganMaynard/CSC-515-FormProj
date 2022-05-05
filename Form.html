@@ -2,79 +2,15 @@
 <html>
 
 <head>
-    <title>CSC 515 HW1</title>
-    <style type="text/css">
-        #Heading {
-            text-align: center;
-            color: red;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        label {
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        input {
-            display: inline-block;
-            margin-bottom: 5px;
-            padding: 12px 20px;
-        }
-
-        select {
-            margin-bottom: 10px;
-        }
-
-        #fname {
-            width: 70%;
-        }
-
-        #lname {
-            width: 70%;
-        }
-
-        #email {
-            width: 70%;
-        }
-
-        #mobile {
-            width: 70%;
-        }
-
-        #city {
-            width: 70%;
-        }
-
-        #state {
-            width: 70%;
-        }
-
-        #pword {
-            width: 70%;
-        }
-
-        #submit {
-            padding: 2px !important;
-        }
-
-        #gender {
-            border: none;
-            margin-bottom: 0px;
-        }
-
-        .div {
-            margin-bottom: 5px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>CSC 515 Project</title>
 </head>
 
 <body>
     <p id="Heading">Registration Form</p>
 
     <!-- To open in xampp, type localhost/Form.html into browser -->
-    <form action="sub_page.php" method="post">
+    <form action="" method="post">
         <label for="fname">First Name:</label>
         <br>
         <input type="text" id="fname" name="fname" placeholder="Enter your first name">
@@ -93,7 +29,7 @@
         <div id="resultMobile"></div>
         <label for="gender">Gender:</label>
         <br>
-        <fieldset id="gender">
+        <fieldset id="gender" class="gender">
             <input type="radio" id="male" value="male" name="gender">Male
             <input type="radio" id="female" value="female" name="gender">Female
         </fieldset>
@@ -121,139 +57,150 @@
         <br>
         <input type="password" id="pword" name="pword">
         <div id="resultPass"></div>
-        <input type="submit" value="Submit" onclick=" return Validate();">
+        <input type="submit" value="Submit">
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-        //add $(document).ready(function(){} to this code
+        $(document).ready(function () {
+            $("form").submit(function () {
+                //variable declarations
+                var valid = true
+                var first = $('#fname').val();
+                var last = $('#lname').val();
+                var mail = $('#email').val();
+                var number = $('#mobile').val();
+                var gen1 = $("#male");
+                var gen2 = $("#female");
+                var location = $('#city').val();
+                var state = $('#state').val();
+                var pass = $('#pword').val();
+                var nameRegex = /^[a-zA-Z'\s]{1,30}$/;
+                var emailRegex = /^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$/;
+                var mobileRegex = /^(?=.*\d)/;
+                var locationRegex = /^[a-zA-Z]/;
+                var passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){3,10}/;
 
-        function Validate() {
-            //variable declarations
-            var first = document.getElementById('fname').value;
-            var last = document.getElementById('lname').value;
-            var mail = document.getElementById('email').value;
-            var number = document.getElementById('mobile').value;
-            var location = document.getElementById('city').value;
-            var state = document.getElementById('state').value;
-            var pass = document.getElementById('pword').value;
-            var errorCount = 0;
-
-            //validation
-            if (!/^[a-zA-Z'\s]{1,30}$/.test(first)) {
-                document.getElementById('resultFName').innerText = "";
-                document.getElementById('resultFName').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultFName').innerText = "";
-                errorCount--;
-                document.getElementById('resultFName').innerHTML += "<p style='color:green'>Correct</p>";
-            }
-
-            if (!/^[a-zA-Z'\s]{1,30}$/.test(last)) {
-                document.getElementById('resultLName').innerText = "";
-                document.getElementById('resultLName').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultLName').innerText = "";
-                errorCount--;
-                document.getElementById('resultLName').innerHTML += "<p style='color:green'>Correct</p>";
-            }
-
-            //need to limit to two domains
-            if (!/^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$/.test(mail)) {
-                document.getElementById('resultEmail').innerText = "";
-                document.getElementById('resultEmail').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultEmail').innerText = "";
-                errorCount--;
-                document.getElementById('resultEmail').innerHTML += "<p style='color:green'>Correct</p>";
-            }
-
-            //Utilized to prevent letters from being inserted into mobile
-            if (!/^(?=.*\d)/.test(number)) {
-                document.getElementById('resultMobile').innerText = "";
-                document.getElementById('resultMobile').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultMobile').innerText = "";
-                errorCount--;
-                document.getElementById('resultMobile').innerHTML += "<p style='color:green'>Correct</p>";
-            }
-
-            if (!document.getElementById('male').checked) {
-                if (!document.getElementById('female').checked) {
-                    document.getElementById('resultGender').innerText = "";
-                    document.getElementById('resultGender').innerHTML += "<p style='color:red'>Error</p>";
-                    errorCount++;
+                if (!nameRegex.test(first)) {
+                    $('#resultFName').html("");
+                    $('#resultFName').html("<p style='color:red'>Error</p>");
+                    valid = false;
                 }
-            }
-            else {
-                document.getElementById('resultGender').innerText = "";
-                errorCount--;
-                document.getElementById('resultGender').innerHTML += "<p style='color:green'>Correct</p>";
-            }
+                else {
+                    $('#resultFName').html("");
+                    $('#resultFName').html("<p style='color:green'>Correct</p>");
+                }
 
-            if (document.getElementById('female').checked) {
-                document.getElementById('resultGender').innerText = "";
-                errorCount--;
-                document.getElementById('resultGender').innerHTML += "<p style='color:green'>Correct</p>";
-            }
+                if (!nameRegex.test(last)) {
+                    $('#resultLName').html("");
+                    $('#resultLName').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultLName').html("");
+                    $('#resultLName').html("<p style='color:green'>Correct</p>");
+                }
 
-            //Preventing numbers from being input
-            if (!/^[a-zA-Z]/.test(location)) {
-                document.getElementById('resultCity').innerText = "";
-                document.getElementById('resultCity').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultCity').innerText = "";
-                errorCount--;
-                document.getElementById('resultCity').innerHTML += "<p style='color:green'>Correct</p>";
-            }
+                //update regex to limit to two domains
+                if (!emailRegex.test(mail)) {
+                    $('#resultEmail').html("");
+                    $('#resultEmail').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultEmail').html("");
+                    $('#resultEmail').html("<p style='color:green'>Correct</p>");
+                }
 
-            //Preventing numbers from being input
-            if (!/^[a-zA-Z]/.test(state)) {
-                document.getElementById('resultState').innerText = "";
-                document.getElementById('resultState').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultState').innerText = "";
-                errorCount--;
-                document.getElementById('resultState').innerHTML += "<p style='color:green'>Correct</p>";
-            }
+                if (!mobileRegex.test(number)) {
+                    $('#resultMobile').html("");
+                    $('#resultMobile').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultMobile').html("");
+                    $('#resultMobile').html("<p style='color:green'>Correct</p>");
+                }
 
-            if (document.getElementById('qualif').selectedIndex == 0) {
-                document.getElementById('resultQual').innerText = "";
-                document.getElementById('resultQual').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultQual').innerText = "";
-                errorCount--;
-                document.getElementById('resultQual').innerHTML += "<p style='color:green'>Correct</p>";
-            }
+                if (!gen1.prop("checked")) {
+                    if (!gen2.prop("checked")) {
+                        $('#resultGender').html("");
+                        $('#resultGender').html("<p style='color:red'>Error</p>");
+                        valid = false;
+                    }
 
-            if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){3,10}/.test(pass)) {
-                document.getElementById('resultPass').innerText = "";
-                document.getElementById('resultPass').innerHTML += "<p style='color:red'>Error</p>";
-                errorCount++;
-            }
-            else {
-                document.getElementById('resultPass').innerText = "";
-                errorCount--;
-                document.getElementById('resultPass').innerHTML += "<p style='color:green'>Correct</p>";
-            }
+                    if (gen2.prop("checked")) {
+                        $('#resultGender').html("");
+                        $('#resultGender').html("<p style='color:green'>Correct</p>");
+                    }
+                }
+                else {
+                    $('#resultGender').html("");
+                    $('#resultGender').html("<p style='color:green'>Correct</p>");
+                }
 
-            if (errorCount != 0) {
-                return false;
-            }
-        }
+                if (!locationRegex.test(location)) {
+                    $('#resultCity').html("");
+                    $('#resultCity').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultCity').html("");
+                    $('#resultCity').html("<p style='color:green'>Correct</p>");
+                }
+
+                if (!locationRegex.test(state)) {
+                    $('#resultState').html("");
+                    $('#resultState').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultState').html("");
+                    $('#resultState').html("<p style='color:green'>Correct</p>");
+                }
+
+                if ($("#qualif").prop('selectedIndex') == 0) {
+                    $('#resultQual').html("");
+                    $('#resultQual').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultQual').html("");
+                    $('#resultQual').html("<p style='color:green'>Correct</p>");
+                }
+
+                if (!passRegex.test(pass)) {
+                    $('#resultPass').html("");
+                    $('#resultPass').html("<p style='color:red'>Error</p>");
+                    valid = false;
+                }
+                else {
+                    $('#resultPass').html("");
+                    $('#resultPass').html("<p style='color:green'>Correct</p>");
+                }
+
+                if (valid == false) {
+                    return false;
+                }
+                else {
+                    //Hardcoded values for testing - replace with input values
+                    $.post("sub_page.php",
+                        {
+                            name: "Keegan",
+                            last: "Maynard",
+                            email: "Keegan.m13@yahoo.com",
+                            number: "5734897513",
+                            gender: "Male",
+                            city: "Ashland",
+                            state: "MO",
+                            qualif: "Graduation",
+                            passW: "TestPass"
+                        },
+                        function (status) {
+                            alert("Status: " + status);
+                        });
+                }
+            });
+        });
     </script>
 </body>
 
