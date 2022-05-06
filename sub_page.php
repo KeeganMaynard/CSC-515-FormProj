@@ -1,6 +1,7 @@
 
 <?php
-	$data = [];
+	$success = true;
+	$data = "Form input successful";
 	
 	//Variable declaration
 	$fname = $_POST["name"];
@@ -20,87 +21,58 @@
 	$stringRegex = "/^[a-zA-Z]/";
 	$passRegex = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){3,10}/";
 
-	if(preg_match($nameRegex, $fname)){
-		echo $fname;
+	if(!preg_match($nameRegex, $fname)){
+		$success = false;
+	}
+	
+	if(!preg_match($nameRegex, $lname))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($emailRegex, $email))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($mobileRegex, $mobile))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($stringRegex, $gender))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($stringRegex, $city))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($stringRegex, $state))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($stringRegex, $qualif))
+	{
+		$success = false;
+	}
+	
+	if(!preg_match($passRegex, $pass))
+	{
+		$succes = false;
+	}
+	
+	if($success == false)
+	{
+		$data = "Form input unsuccessful";
 	}
 	else
 	{
-		echo "Invalid";
+		//connect to the database and insert values
 	}
-	
-	if(preg_match($nameRegex, $lname))
-	{
-		echo $lname;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($emailRegex, $email))
-	{
-		echo $email;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($mobileRegex, $mobile))
-	{
-		echo $mobile;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($stringRegex, $gender))
-	{
-		echo $gender;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($stringRegex, $city))
-	{
-		echo $city;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($stringRegex, $state))
-	{
-		echo $state;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($stringRegex, $qualif))
-	{
-		echo $qualif;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	if(preg_match($passRegex, $pass))
-	{
-		echo $pass;
-	}
-	else
-	{
-		echo "Invalid";
-	}
-	
-	$data['message'] = 'In the PHP';
 
 	echo json_encode($data);
 ?>
