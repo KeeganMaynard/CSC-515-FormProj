@@ -84,20 +84,16 @@
 		$qualification = mysqli_real_escape_string($conn, $qualif);
 		$password = mysqli_real_escape_string($conn, $pass);
 		
-		$sql = "INSERT INTO csc515_project (firstname, lastname, email, mobile, gender, city, state, qualification, password)
+		$sql = "INSERT INTO member_registration (firstname, lastname, email, mobile, gender, city, state, qualification, password)
 		VALUES ('$firstname', '$lastname', '$email', '$mobile', '$gender', '$city', '$state', '$qualification', '$password');";
 		
-		if(mysqli_query($conn, $sql))
+		if(!mysqli_query($conn, $sql))
 		{
-			echo "Successful connection to database";
-		}
-		else
-		{
-			echo '"Error: " .$sql ."". mysqli_error($conn)';
+			$data = '"Error: " .$sql ."". mysqli_error($conn)';
 		}
 		
 		mysqli_close($conn);
 	}
 
-	echo json_encode($data);
+	echo $data;
 ?>
