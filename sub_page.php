@@ -72,6 +72,31 @@
 	else
 	{
 		//connect to the database and insert values
+		require_once "db.php";
+		
+		$firstname = mysqli_real_escape_string($conn,$fname);
+		$lastname = mysqli_real_escape_string($conn, $lname);
+		$email = mysqli_real_escape_string($conn, $email);
+		$mobile = mysqli_real_escape_string($conn, $mobile);
+		$gender = mysqli_real_escape_string($conn, $gender);
+		$city = mysqli_real_escape_string($conn, $city);
+		$state = mysqli_real_escape_string($conn, $state);
+		$qualification = mysqli_real_escape_string($conn, $qualif);
+		$password = mysqli_real_escape_string($conn, $pass);
+		
+		$sql = "INSERT INTO csc515_project (firstname, lastname, email, mobile, gender, city, state, qualification, password)
+		VALUES ('$firstname', '$lastname', '$email', '$mobile', '$gender', '$city', '$state', '$qualification', '$password');";
+		
+		if(mysqli_query($conn, $sql))
+		{
+			echo "Successful connection to database";
+		}
+		else
+		{
+			echo '"Error: " .$sql ."". mysqli_error($conn)';
+		}
+		
+		mysqli_close($conn);
 	}
 
 	echo json_encode($data);
