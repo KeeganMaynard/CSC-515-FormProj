@@ -74,8 +74,8 @@
                 var location = $('#city').val();
                 var state = $('#state').val();
                 var pass = $('#pword').val();
-                var nameRegex = /^[a-zA-Z'\s]{1,30}$/;
-                var emailRegex = /^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$/;
+                var nameRegex = /^[-a-zA-Z'\s]{1,30}$/;
+                var emailRegex = /^[-'_a-z0-9]+(?:\.[-'_a-z0-9]+)*@[\.a-z0-9]/;
                 var mobileRegex = /^(?=.*\d)/;
                 var locationRegex = /^[a-zA-Z]/;
                 var passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){3,10}/;
@@ -182,10 +182,8 @@
                     return false;
                 }
                 else {
-                    //Grab values of radio button and selected option
                     var selGen = $("input[name='gender']:checked").val();
                     var selQual = $("#qualif").find(":selected").val();
-
                     $.post("sub_page.php",
                         {
                             name: first,
