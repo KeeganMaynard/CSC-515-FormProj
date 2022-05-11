@@ -15,10 +15,10 @@
 	$pass = $_POST["passW"];
 
 	//Regex variable declarations
-	$nameRegex = "/^[a-zA-Z'\s]{1,30}$/";
-	$emailRegex = "/^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$/";
+	$nameRegex = "/^[-a-zA-Z'\s]{1,30}$/";
+	$emailRegex = "/^[-'_a-z0-9]+(?:\.[-'_a-z0-9]+)*@[\.a-z0-9]/";
 	$mobileRegex = "/^(?=.*\d)/";
-	$stringRegex = "/^[a-zA-Z]/";
+	$stringRegex = "/^[a-zA-Z]/"; //For city, location, gender, and qualification values
 	$passRegex = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){3,10}/";
 
 	if(!preg_match($nameRegex, $fname)){

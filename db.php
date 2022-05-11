@@ -11,11 +11,7 @@ if(!$conn)
 
 $check = "SHOW TABLES LIKE 'member_registration'";
 
-if(mysqli_query($conn, $check))
-{
-	//Table already created - do nothing
-}
-else
+if(!mysqli_query($conn, $check))
 {
 	//sql to create table
 	$sql = "CREATE TABLE member_registration(
@@ -23,13 +19,13 @@ else
 	firstname VARCHAR(255) NOT NULL,
 	lastname VARCHAR(255) NOT NULL,
 	email VARCHAR(255),
-	mobile INT(20),
+	mobile BIGINT(20),
 	gender VARCHAR(255),
 	city VARCHAR(255),
 	state VARCHAR(255),
 	qualification VARCHAR(255),
 	password VARCHAR(255)
-	)";
+	);";
 	
 	if(!mysqli_query($conn, $sql))
 	{
